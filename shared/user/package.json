@@ -1,0 +1,21 @@
+{
+  "name": "@magma/shared.user",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "devDependencies": {
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.2.2"
+  },
+  "private": true,
+  "scripts": {
+    "build": "rm -rf dist && tsc src/index.ts --declaration --allowJs --outDir dist"
+  },
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
+  "description": "",
+  "dependencies": {
+    "zod": "^3.22.4"
+  }
+}

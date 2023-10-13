@@ -1,0 +1,26 @@
+{
+  "name": "@magma/user-service",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "scripts": {
+    "start:dev": "nodemon src/index.ts",
+    "build": "tsc -b",
+    "start:prod": "node ../dist/user-service/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.0.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.2.2"
+  },
+  "nodemonConfig": {
+    "ignore": ["*.js"],
+    "watch": ["./src/*", "../shared/*"]
+  },
+  "keywords": [],
+  "description": "",
+  "dependencies": {
+    "@magma/shared.user": "^1.0.0"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "magam-recruitment-app",
+  "workspaces": [
+    "shared/user",
+    "user-service",
+    "notification-service"
+  ],
+  "scripts": {
+    "build:watch": "tsc -b -w",
+    "build": "npm run build --workspaces --if-present --watch && rm -rf dist && tsc -b"
+  }
+}
