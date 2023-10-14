@@ -3,10 +3,14 @@
   "workspaces": [
     "shared/user",
     "user-service",
-    "notification-service"
+    "notification-service",
+    "shared/common"
   ],
   "scripts": {
-    "build:watch": "tsc -b -w",
+    "build:watch": "npm run build --workspaces --if-present --watch && rm -rf dist && tsc -b -w",
     "build": "npm run build --workspaces --if-present --watch && rm -rf dist && tsc -b"
+  },
+  "dependencies": {
+    "@magma/shared.common": "^1.0.0"
   }
 }

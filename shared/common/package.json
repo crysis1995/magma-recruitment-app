@@ -1,5 +1,5 @@
 {
-    "name": "@magma/shared.user",
+    "name": "@magma/shared.common",
     "version": "1.0.0",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -14,8 +14,5 @@
     "author": "",
     "license": "ISC",
     "keywords": [],
-    "description": "",
-    "dependencies": {
-        "zod": "^3.22.4"
-    }
+    "description": ""
 }
