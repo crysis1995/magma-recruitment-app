@@ -4,5 +4,5 @@ export const startupFunction = (...callbacks: Callbacks): Promise<void> =>
     new Promise((resolve, reject) => {
         Promise.all(callbacks.map((func) => func()))
             .then(() => resolve())
-            .catch(() => reject("Error in startup function"));
+            .catch((err) => reject(err));
     });

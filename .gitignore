@@ -134,3 +134,4 @@ dist
 /workspace.xml
 /httpRequests/
 /.idea/
+.docker/

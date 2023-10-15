@@ -1,19 +1,15 @@
 import { getEnvProperty } from "../services/env.service";
 import { EnvProperty } from "../types/env.service.type";
 import mongoose from "mongoose";
+import { ILoggerService } from "../types/logger.service.type";
 
-export const mongoInit = async () => {
+export const mongoInit = (logger: ILoggerService) => async () => {
     const mongoConnectionString = getEnvProperty(
         EnvProperty.MongoDbConnectionString,
     );
     if (!mongoConnectionString)
         throw new Error("Empty mongo connection string!");
 
-    try {
-        await mongoose.connect(mongoConnectionString);
-        console.log("Connected to mongo!");
-    } catch (e) {
-        console.log(e);
-        process.exit(1);
-    }
+    await mongoose.connect(mongoConnectionString);
+    logger.info({ message: "Connected to mongo!" });
 };

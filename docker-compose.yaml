@@ -1,6 +1,20 @@
-version: '3.8'
+version: "3.8"
 services:
-  mongo:
-    image: mongo:7
-    ports:
-      - '27017:27017'
+    mongo:
+        image: mongo:7
+        ports:
+            - "27017:27017"
+    rabbitmq:
+        image: rabbitmq:3.12-management-alpine
+        container_name: "rabbitmq"
+        ports:
+            - '5672:5672'
+            - '15672:15672'
+        volumes:
+            - ./.docker/rabbitmq/data/:/var/lib/rabbitmq/
+            - ./.docker/rabbitmq/log/:/var/log/rabbitmq
+        networks:
+            - default_network
+networks:
+    default_network:
+        driver: bridge
