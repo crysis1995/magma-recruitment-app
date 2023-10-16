@@ -1,0 +1,8 @@
+### Update user request
+PUT http://localhost:3000/users/652c6f46ed26556242d9fbff
+Content-Type: application/json
+
+{
+  "email": "test@test.com"
+}
+

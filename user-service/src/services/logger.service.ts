@@ -1,10 +1,11 @@
+import winston, { transports } from "winston";
+import { Error } from "mongoose";
 import {
     ErrorLogArguments,
     ILoggerService,
     InfoLogArguments,
     WarnLogArguments,
 } from "../types/logger.service.type";
-import winston, { transports } from "winston";
 
 const myFormat = winston.format.printf(({ level, message, timestamp }) => {
     return `${timestamp} [${level}]\t${message}`;
@@ -23,17 +24,23 @@ class LoggerService implements ILoggerService {
         });
     }
 
-    warn({ message }: WarnLogArguments): void {
-        this.logger.warn(message);
+    warn({ message, label }: WarnLogArguments): void {
+        const labelMess = label ? `[${label}]  ` : "";
+        this.logger.warn(labelMess + message);
     }
 
-    info({ message }: InfoLogArguments): void {
-        this.logger.info(message);
+    info({ message, label }: InfoLogArguments): void {
+        const labelMess = label ? `[${label}]  ` : "";
+        this.logger.info(labelMess + message);
     }
 
-    error({ message, err }: ErrorLogArguments): void {
-        let logMessage = message ? `${message}\n` : "";
-        logMessage += `Error message:${err.message}\nError name:${err.name}\nError stack:\n${err.stack}`;
+    error({ message, err, label }: ErrorLogArguments): void {
+        const labelMess = label ? `[${label}]  ` : "";
+        let logMessage = labelMess + (message ? `${message}\n` : "");
+        if (err instanceof Error)
+            logMessage += `Error message:${err.message}\nError name:${err.name}\nError stack:\n${err.stack}`;
+        else logMessage += err;
+
         this.logger.error(logMessage);
     }
 }

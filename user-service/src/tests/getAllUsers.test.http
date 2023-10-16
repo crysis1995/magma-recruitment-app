@@ -1,0 +1,6 @@
+GET http://localhost:3000/users/{{id}}
+
+
+
+###
+GET localhost:3000/users?page_start=1

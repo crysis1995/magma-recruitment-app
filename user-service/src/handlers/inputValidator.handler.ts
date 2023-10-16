@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import { AnyZodObject, z } from "zod";
-import { errorHandler } from "./error.handler";
+import { AnyZodObject } from "zod";
+
 export const inputValidatorHandler =
     (schema: AnyZodObject) =>
     (req: Request, res: Response, next: NextFunction) => {

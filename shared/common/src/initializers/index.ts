@@ -1,0 +1,1 @@
+export * from "@magma/user-service/dist/initializers/rabbitmq.init";

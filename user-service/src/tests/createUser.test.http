@@ -1,0 +1,18 @@
+### Proper user creation
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "name": "John",
+  "email": "john@gmail.com"
+}
+
+
+### Missing email adress
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "name": "John"
+}
+

@@ -15,10 +15,12 @@ export const initExpress = () => {
     app.use(express.json());
     app.use(logRequestHandler(loggerService));
     app.use("/", routers);
-
     app.use(errorHandler(loggerService));
 
     app.listen(PORT, async () => {
-        loggerService.info({ message: `App initialized on port ${PORT}` });
+        loggerService.info({
+            label: "Express",
+            message: `App initialized on port ${PORT}`,
+        });
     });
 };

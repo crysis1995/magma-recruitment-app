@@ -1,0 +1,3 @@
+### Get user by Id request
+GET http://localhost:3000/users/652c6f46ed26556242d9fbff
+Accept: application/json

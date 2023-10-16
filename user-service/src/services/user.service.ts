@@ -8,19 +8,24 @@ import { createUserDto, CreateUserDto } from "../dto/createUser.dto";
 import { updateUserDto, UpdateUserDto } from "../dto/updateUser.dto";
 import { UserDataWrongFormatError } from "../errors/userDataWrongFormat.error";
 import { ILoggerService } from "../types/logger.service.type";
+import { IMessageService } from "../types/message.service.type";
+import messages from "../messages/";
 
 interface InjectedServices {
     userRepository: IUserRepository;
     logger: ILoggerService;
+    messageService: IMessageService;
 }
 
 export default class UserService implements IUserService {
     private userRepository: IUserRepository;
     private logger: ILoggerService;
+    private messageService: IMessageService;
 
-    constructor({ userRepository, logger }: InjectedServices) {
+    constructor({ userRepository, logger, messageService }: InjectedServices) {
         this.userRepository = userRepository;
         this.logger = logger;
+        this.messageService = messageService;
     }
 
     async isUserExist(userId: UserIdDto): Promise<Boolean> {
@@ -45,6 +50,8 @@ export default class UserService implements IUserService {
 
         const user = await this.userRepository.createUser(parsedData.data);
         this.logger.info({ message: `User ${user.id} created` });
+        this.messageService.sendMessage(new messages.UserCreatedMessage(user));
+
         return user;
     }
 
@@ -68,6 +75,9 @@ export default class UserService implements IUserService {
         if (!isUserExist) throw new UserNotFoundError(userId);
 
         await this.userRepository.deleteUser(userId);
+        this.messageService.sendMessage(
+            new messages.UserDeletedMessage(userId),
+        );
         this.logger.info({ message: `User ${userId.id} deleted` });
     }
 }

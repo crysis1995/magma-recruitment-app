@@ -12,10 +12,16 @@ import UserRepository from "../repositories/user.repository";
 import { UserModel } from "../schemas/user.schema";
 import loggerService from "../services/logger.service";
 import { inputValidatorHandler } from "../handlers/inputValidator.handler";
+import MessageService from "../services/message.service";
 
 const userRouter = express.Router();
 const userRepository = new UserRepository(UserModel);
-const userService = new UserService({ userRepository, logger: loggerService });
+const messageService = new MessageService({ logger: loggerService });
+const userService = new UserService({
+    userRepository,
+    logger: loggerService,
+    messageService,
+});
 
 userRouter
     .get(
